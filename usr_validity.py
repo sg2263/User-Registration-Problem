@@ -67,7 +67,7 @@ def password_rule1(password):
        Return value:  boolean value True if it matches the search pattern ,else False."""
         
     
-    if bool(re.match(r"(?=[A-Z]).{8,}",password)):
+    if bool(re.match(r".{8,}",password)):
         logger.info(f"User's password passed Rule 1.")
         return True
     else:
@@ -75,14 +75,14 @@ def password_rule1(password):
         return False
 
 def password_rule2(password):
-    """Description : This method Checks for the rule 1 defined under usecase 5.This checks if the password entered by the user has atleast 8 chracters and one Caps letter.
+    """Description : This method Checks for the rule 2 defined under usecase 5.This checks if the password entered by the user has atleast 8 chracters and one Caps letter.
     
        Parameters : Single parameter user password
     
        Return value:  boolean value True if it matches the search pattern ,else False."""
         
     
-    if bool(re.match(r"[A-Z].{1,}.{8,}",password)) :
+    if bool(re.match(r".*[A-Z].{1,}.{8,}",password)) :
         logger.info(f"User's password passed Rule 2.")
         return True
     else:
