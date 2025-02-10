@@ -43,6 +43,22 @@ def email_check(email):
     else:
         logger.error(f"Registration Issue: User's email id {email} was Invalid.")
         return "Invalid Email Id , Please enter a valid one"
+    
+def contact_check(ph_no):
+    """Description : This method Checks if the user follows the correct phone number format while registration.
+    
+       Parameters : Single parameter named phone number 
+    
+       Return value:  String """
+        
+    
+    if bool(re.match(r"^[0-9]{2} [0-9]{10}$",ph_no)):
+        logger.info(f"User's contact {ph_no} was Valid.")
+        return "Valid Contact Detail"
+    else:
+        logger.error(f"Registration Issue: User's contact {ph_no} was Invalid.")
+        return "Invalid Contact details"
+    
         
     
     
@@ -54,10 +70,12 @@ def main():
     result_first = firstname_check(firstname)
     result_second = last_check(lastname)
     email=input("Enter the maid id :")
+    ph_no=input("Enter the phone number in correct format:")
     
     print(result_first)
     print(result_second)
     print(email_check(email))
+    print(contact_check(ph_no))
     
 
 if __name__ == '__main__':
