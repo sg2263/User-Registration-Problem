@@ -67,7 +67,7 @@ def password_rule1(password):
        Return value:  boolean value True if it matches the search pattern ,else False."""
         
     
-    if bool(re.match(r"(?=[A-Z]).{8,}",password)):
+    if bool(re.match(r".{8,}",password)):
         logger.info(f"User's password passed Rule 1.")
         return True
     else:
@@ -75,18 +75,33 @@ def password_rule1(password):
         return False
 
 def password_rule2(password):
-    """Description : This method Checks for the rule 1 defined under usecase 5.This checks if the password entered by the user has atleast 8 chracters and one Caps letter.
+    """Description : This method Checks for the rule 2 defined under usecase 5.This checks if the password entered by the user has atleast 8 chracters and one Caps letter.
     
        Parameters : Single parameter user password
     
        Return value:  boolean value True if it matches the search pattern ,else False."""
         
     
-    if bool(re.match(r"[A-Z].{1,}.{8,}",password)) :
+    if bool(re.match(r"(?=.*[A-Z]).{8,}",password)) :
         logger.info(f"User's password passed Rule 2.")
         return True
     else:
         logger.error(f"Registration Issue: User's password was Invalid [Didn't Pass Rule 2].")
+        return False
+    
+def password_rule3(password):
+    """Description : This method Checks for the rule 3 defined under usecase 5.This checks if the password entered by the user has atleast 8 chracters ,atleast one Upper Case letter and atleast 1 numeric value.
+    
+       Parameters : Single parameter user password
+       
+       Return value:  boolean value True if it matches the search pattern ,else False."""
+        
+    
+    if bool(re.match(r"(?=.*[A-Z])(?=.*\d).{8,}",password)) :
+        logger.info(f"User's password passed Rule 3.")
+        return True
+    else:
+        logger.error(f"Registration Issue: User's password was Invalid [Didn't Pass Rule 3].")
         return False
     
         
@@ -111,9 +126,12 @@ def main():
         print("Fails Rule 1.")
     else:
         if not password_rule2(password):
-            print("Fails Rule 2 but passed rule 1.")
+            print("Fails Rule 2 but passed rule 1,try adding atleast one upper case character.")
         else:
-            print("Passed both Rules.")
+            if not password_rule3(password):
+                print("Fails Rule 3 but passes Rule 1 and 2,try atleast 1 numeric character")
+            else:
+                print("All three password rules passed.")
         
     
 
