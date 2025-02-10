@@ -67,35 +67,53 @@ def password_rule1(password):
        Return value:  boolean value True if it matches the search pattern ,else False."""
         
     
-    if bool(re.match(r".{8,}",password)):
+    if bool(re.match(r"(?=[A-Z]).{8,}",password)):
         logger.info(f"User's password passed Rule 1.")
         return True
     else:
         logger.error(f"Registration Issue: User's password was Invalid [Didn't Pass Rule 1].")
+        return False
+
+def password_rule2(password):
+    """Description : This method Checks for the rule 1 defined under usecase 5.This checks if the password entered by the user has atleast 8 chracters and one Caps letter.
+    
+       Parameters : Single parameter user password
+    
+       Return value:  boolean value True if it matches the search pattern ,else False."""
+        
+    
+    if bool(re.match(r"[A-Z].{1,}.{8,}",password)) :
+        logger.info(f"User's password passed Rule 2.")
+        return True
+    else:
+        logger.error(f"Registration Issue: User's password was Invalid [Didn't Pass Rule 2].")
         return False
     
         
     
     
 def main():
-    """Driver code to take user input and validate username."""       
+    # """Driver code to take user input and validate username."""       
 
-    # firstname = input("Enter First Name: ")
-    # lastname=input("Enter Last Name:")
-    # result_first = firstname_check(firstname)
-    # result_second = last_check(lastname)
-    # email=input("Enter the maid id :")
-    # ph_no=input("Enter the phone number in correct format:")
+    firstname = input("Enter First Name: ")
+    lastname=input("Enter Last Name:")
+    result_first = firstname_check(firstname)
+    result_second = last_check(lastname)
+    email=input("Enter the maid id :")
+    ph_no=input("Enter the phone number in correct format:")
     
-    # print(result_first)
-    # print(result_second)
-    # print(email_check(email))
-    # print(contact_check(ph_no))
+    print(result_first)
+    print(result_second)
+    print(email_check(email))
+    print(contact_check(ph_no))
     password=input("Enter the user password: ")
-    if password_rule1(password):
-        print("Passes rule 1.")
+    if not password_rule1(password):
+        print("Fails Rule 1.")
     else:
-        print("Failed Rule 1")
+        if not password_rule2(password):
+            print("Fails Rule 2 but passed rule 1.")
+        else:
+            print("Passed both Rules.")
         
     
 
