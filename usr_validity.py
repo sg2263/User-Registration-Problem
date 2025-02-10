@@ -29,17 +29,35 @@ def last_check(lastname):
     else:
         logger.error(f"Registration issue :User's lastname {lastname} was invalid.")
         return "Invalid Last Name "
-
+    
+def email_check(email):
+    """Description : This method Checks if the user follows the rules for emails while registration.
+    
+       Parameters : Single parameter named email
+    
+       Return value:  String """
+    
+    if bool(re.match(r"^[a-zA-Z0-9_.*]+[a-zA-Z0-9_]*@[a-zA-Z.]+[a-zA-Z]+[a-zA-Z]$",email)):
+        logger.info(f"User's email id {email} was Valid.")
+        return "Valid Email Id"
+    else:
+        logger.error(f"Registration Issue: User's email id {email} was Invalid.")
+        return "Invalid Email Id , Please enter a valid one"
+        
+    
+    
 def main():
     """Driver code to take user input and validate username."""       
-
 
     firstname = input("Enter First Name: ")
     lastname=input("Enter Last Name:")
     result_first = firstname_check(firstname)
     result_second = last_check(lastname)
+    email=input("Enter the maid id :")
+    
     print(result_first)
     print(result_second)
+    print(email_check(email))
     
 
 if __name__ == '__main__':
